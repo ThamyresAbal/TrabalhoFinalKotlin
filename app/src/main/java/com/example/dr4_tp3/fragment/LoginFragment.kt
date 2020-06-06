@@ -10,18 +10,17 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.dr4_tp3.R
 import com.example.dr4_tp3.viewModel.UsuarioViewModel
-import kotlinx.android.synthetic.main.fragment_cadastro.*
+import kotlinx.android.synthetic.main.fragment_login.*
 
 
-
-class CadastroFragment : Fragment() {
+class LoginFragment : Fragment() {
     private lateinit var usuarioViewModel: UsuarioViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cadastro, container, false)
+        return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,16 +28,12 @@ class CadastroFragment : Fragment() {
         activity?.let {
             usuarioViewModel = ViewModelProviders.of(it).get(UsuarioViewModel::class.java)
         }
-        btnCadastrar.setOnClickListener {
-
-             val cadastrou = usuarioViewModel.verificarNulo(view, requireContext().applicationContext)
-            if(!cadastrou){
+        btnLogin.setOnClickListener {
+            if(txtEmail.text.isNullOrBlank()|| txtSenha.text.isNullOrBlank()) {
                 Toast.makeText(context, "Preencha todas as informações", Toast.LENGTH_SHORT).show()
             }else{
-                usuarioViewModel.salvarNoFirestore(requireContext().applicationContext)
+                usuarioViewModel.loginFirestore(requireContext().applicationContext,txtEmail.text.toString(), txtSenha.text.toString())
+                }
             }
         }
     }
-
-
-}

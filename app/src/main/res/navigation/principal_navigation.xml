@@ -3,11 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/principal_navigation"
-    app:startDestination="@id/cadastroFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/cadastroFragment"
         android:name="com.example.dr4_tp3.fragment.CadastroFragment"
         android:label="fragment_cadastro"
         tools:layout="@layout/fragment_cadastro" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.dr4_tp3.fragment.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.dr4_tp3.fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
 </navigation>

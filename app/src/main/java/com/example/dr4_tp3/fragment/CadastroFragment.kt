@@ -1,17 +1,16 @@
 package com.example.dr4_tp3.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.dr4_tp3.R
 import com.example.dr4_tp3.viewModel.UsuarioViewModel
 import kotlinx.android.synthetic.main.fragment_cadastro.*
-
 
 
 class CadastroFragment : Fragment() {
@@ -36,6 +35,7 @@ class CadastroFragment : Fragment() {
                 Toast.makeText(context, "Preencha todas as informações", Toast.LENGTH_SHORT).show()
             }else{
                 usuarioViewModel.salvarNoFirestore(requireContext().applicationContext)
+                findNavController().navigate(R.id.loginFragment)
             }
         }
     }

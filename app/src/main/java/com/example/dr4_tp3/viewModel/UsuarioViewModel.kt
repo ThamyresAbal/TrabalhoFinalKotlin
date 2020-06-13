@@ -34,11 +34,14 @@ class UsuarioViewModel : ViewModel(){
                 email = view.txtEmail.text.toString(),
                 senha = view.txtSenha.text.toString()
 
+
+
             )
             return true
         }
 
     }
+
 
     fun salvarNoFirestore(context: Context){
 
@@ -47,7 +50,6 @@ class UsuarioViewModel : ViewModel(){
         var user: MutableMap<String, Any> = HashMap()
         user["email"] = usuario!!.email
         user["senha"] = usuario!!.senha
-
 
         collection.document(usuario!!.email).set(user)
         criarAth(usuario!!.email, usuario!!.senha, context)

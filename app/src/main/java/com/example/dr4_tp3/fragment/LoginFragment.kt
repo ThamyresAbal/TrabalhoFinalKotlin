@@ -1,11 +1,11 @@
 package com.example.dr4_tp3.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.dr4_tp3.R
@@ -27,6 +27,9 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         activity?.let {
             usuarioViewModel = ViewModelProviders.of(it).get(UsuarioViewModel::class.java)
+        }
+        txtSemCadastro.setOnClickListener{
+            findNavController().navigate(R.id.cadastroFragment)
         }
         btnLogin.setOnClickListener {
             if(txtEmail.text.isNullOrBlank()|| txtSenha.text.isNullOrBlank()) {

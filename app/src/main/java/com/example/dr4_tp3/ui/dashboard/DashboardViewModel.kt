@@ -1,6 +1,8 @@
 package com.example.dr4_tp3.ui.dashboard
 
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
@@ -12,11 +14,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.layoutlistafavoritos.view.*
 
+
 class DashboardViewModel : ViewModel() {
     //var listaFavoritos: ListaFavorito? = null
     val firebaseStore = FirebaseFirestore.getInstance()
-
-
 
     fun setupRecycleView(
         recycleView: RecyclerView, context: Context
@@ -35,7 +36,7 @@ class DashboardViewModel : ViewModel() {
 
                 val listaFavoritos = it.toObjects(ListaFavorito::class.java)
 
-                recycleView.adapter = ListaFavoritosAdpter(listaFavoritos, this::callbacListaFavoritos)
+                recycleView.adapter = ListaFavoritosAdpter(listaFavoritos, this::callbackListaFavoritos)
                 recycleView.layoutManager = LinearLayoutManager(context)
 
         }.addOnFailureListener{
@@ -43,10 +44,18 @@ class DashboardViewModel : ViewModel() {
         }
     }
 
-    private fun callbacListaFavoritos(context: Context, view: View) {
+     fun callbackListaFavoritos(listaFavorito: ListaFavorito, view: View, context: Context ) {
+         val fireBaseAuthUser = FirebaseAuth.getInstance().currentUser
 
-        view.btncExcluir.setOnClickListener{
 
+
+         view.btncExcluir.setOnClickListener{
+
+            firebaseStore.collection("usuarios").document(fireBaseAuthUser?.email!!)
+                .collection("listaFavorito").document(view.txtNomeListaFavorito.text.toString())
+                .delete()
+                .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!") }
+                .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
 
 
         }

@@ -9,7 +9,10 @@ import com.example.dr4_tp3.R
 import com.example.dr4_tp3.model.ListaFavorito
 import kotlinx.android.synthetic.main.layoutlistafavoritos.view.*
 
-class ListaFavoritosAdpter (private val ListaFavoritos : List<ListaFavorito>, val callback:(ListaFavorito, Context)-> Unit) : RecyclerView.Adapter
+class ListaFavoritosAdpter (private val ListaFavoritos : List<ListaFavorito>, val callback:(ListaFavorito,View, Context)-> Unit
+)
+
+    : RecyclerView.Adapter
 <ListaFavoritosAdpter.ListaFavoritoViewHolder>() {
 
     class ListaFavoritoViewHolder(itemView: View)
@@ -33,13 +36,10 @@ class ListaFavoritosAdpter (private val ListaFavoritos : List<ListaFavorito>, va
         val ListaFavoritoViewHolder = ListaFavoritoViewHolder(view)
         ListaFavoritoViewHolder.btnExcluir.setOnClickListener {
             val lista = ListaFavoritos[ListaFavoritoViewHolder.adapterPosition]
-            callback(lista, parent.context)
+            callback(lista, view, parent.context )
         }
 
-        ListaFavoritoViewHolder.btnEditar.setOnClickListener {
-            val lista = ListaFavoritos[ListaFavoritoViewHolder.adapterPosition]
-            callback(lista, parent.context)
-        }
+
 
         return ListaFavoritoViewHolder
     }

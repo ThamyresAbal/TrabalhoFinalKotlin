@@ -1,11 +1,10 @@
 package com.example.dr4_tp3.ui.notifications
 
-import android.content.ContentValues.TAG
 import android.content.Context
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import com.example.dr4_tp3.model.ListaFavorito
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_notifications.view.*
 
@@ -13,6 +12,7 @@ class NotificationsViewModel : ViewModel() {
 
     var listaFavoritos: ListaFavorito? = null
     val firebaseStore = FirebaseFirestore.getInstance()
+
 
 
     fun verificarNulo(
@@ -31,6 +31,7 @@ class NotificationsViewModel : ViewModel() {
             return true
         }
 
+
     }
 
     fun salvarNoFirestore(context: Context){
@@ -44,24 +45,16 @@ class NotificationsViewModel : ViewModel() {
 
 
     }
-    fun asdasds(context: Context, view: View){
-        var collection = firebaseStore.collection("usuarios")
-        collection.add(ListaFavorito(view.txtNomeLista.text.toString()))
-            ?.addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.id)
-                firebaseStore.collection("usuarios").document(documentReference.id).collection("lista").add(view.txtNomeLista.text.toString())
-            }?.addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
-            }
-    }
+  
 
-    fun fireAddStudentToClassroom(view: View) {
+    fun fireAddListToUser(view: View) {
+        val fireBaseAuthUser = FirebaseAuth.getInstance().currentUser
 
-        var studentsClassroomRef =
-            firebaseStore.collection("usuarios").document("lele@gmail.com")
+        var listaFavoritosRef =
+            firebaseStore.collection("usuarios").document(fireBaseAuthUser?.email!!)
                 .collection("listaFavorito")
 
-        studentsClassroomRef
+        listaFavoritosRef
             .document(view.txtNomeLista.text.toString())
             .set({})
 

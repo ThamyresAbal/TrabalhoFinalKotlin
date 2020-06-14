@@ -26,7 +26,7 @@ class NotificationsViewModel : ViewModel() {
         } else {
             //Caso tudo ocorra ok, começo a alimentar o view model com o resto das informações
             listaFavoritos = ListaFavorito(
-                nomeListaFavorito = view.txtNomeLista.text.toString()
+                listaFavorito = view.txtNomeLista.text.toString()
             )
             return true
         }
@@ -39,9 +39,9 @@ class NotificationsViewModel : ViewModel() {
         var collection = firebaseStore.collection("favoritos")
 
         var lista: MutableMap<String, Any> = HashMap()
-        lista["nomeListaFavorito"] = listaFavoritos!!.nomeListaFavorito
+        lista["nomeListaFavorito"] = listaFavoritos!!.listaFavorito!!
 
-        collection.document(listaFavoritos!!.nomeListaFavorito).set(lista)
+        collection.document(listaFavoritos!!.listaFavorito!!).set(lista)
 
 
     }

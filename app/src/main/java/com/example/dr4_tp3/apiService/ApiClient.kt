@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
     private var instance : Retrofit? = null
-    private val url : String = "https://kitsu.io/api/edge/"
+    private val url : String = "https://kitsu.io"
     private fun getInstance(): Retrofit {
         if (instance == null){
             instance = Retrofit.Builder()

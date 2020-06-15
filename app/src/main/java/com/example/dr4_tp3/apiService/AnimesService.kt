@@ -1,12 +1,12 @@
 package com.example.dr4_tp3.apiService
 
-import com.example.dr4_tp3.model.Anime
+import com.example.dr4_tp3.model.AnimeList
+import retrofit2.Call
 import retrofit2.http.GET
 
 interface AnimesService {
 
-    // Listar todos os Recursos
-    @GET("/anime?filter[text]=Naruto")
-    fun all() : retrofit2.Call<List<Anime>>
+    @GET("/api/edge/anime?page[limit]=10&page[offset]=0")
+    fun all(): Call<AnimeList>
 
 }

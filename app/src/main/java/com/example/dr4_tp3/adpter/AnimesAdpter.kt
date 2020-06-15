@@ -5,12 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dr4_tp3.R
-import com.example.dr4_tp3.model.Anime
 import kotlinx.android.synthetic.main.layouthome.view.*
 
-class AnimesAdpter(
-    private val animes : List<Anime>
-) : RecyclerView.Adapter
+class AnimesAdpter(private val animes: MutableList<String>): RecyclerView.Adapter
 <AnimesAdpter.AnimeViewHolder>() {
 
     class AnimeViewHolder(itemView: View)
@@ -38,7 +35,7 @@ class AnimesAdpter(
         // filme.capa : Bitmap | Int (Resource)
         // ImageView.setImageBitmap(filme.capa)
         // ImageView.setImageResource(filme.capa)
-        holder.txtNomeAnime.text = anime.en
+        holder.txtNomeAnime.text = anime.toString()
 
     }
 }

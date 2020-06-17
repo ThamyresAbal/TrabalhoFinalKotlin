@@ -18,9 +18,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class HomeFragment : Fragment() {
-
     private lateinit var homeViewModel: HomeViewModel
-
+     var  listaAnimes : AnimeList? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,10 +44,10 @@ class HomeFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<AnimeList>, response: Response<AnimeList>) {
-                val listaBairros = response.body()
+                listaAnimes = response.body()
                 val slugList: MutableList<String> = mutableListOf()
 
-                listaBairros?.data?.forEach {
+                listaAnimes?.data?.forEach {
                     slugList.add(it.attributes.slug)
                 }
 
@@ -56,15 +55,28 @@ class HomeFragment : Fragment() {
                 val linearLayoutManager = LinearLayoutManager(requireContext())
                 rcyViewAnimes.layoutManager = linearLayoutManager
                 rcyViewAnimes.scrollToPosition(slugList.size)
-                rcyViewAnimes.adapter =
-                    AnimesAdpter(slugList)
-
+                rcyViewAnimes.adapter = AnimesAdpter(slugList)
 
 
             }
 
 
         })
+
+//        val itemToachHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT){
+//            override fun onMove(
+//                recyclerView: RecyclerView,
+//                viewHolder: RecyclerView.ViewHolder,
+//                target: RecyclerView.ViewHolder
+//            ): Boolean = false
+//
+//            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+//                val position = viewHolder.adapterPosition
+//                listaAnimes
+//            }
+//
+//        })
+
 
     }
 }

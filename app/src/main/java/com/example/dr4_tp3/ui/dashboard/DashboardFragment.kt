@@ -6,12 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.dr4_tp3.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 class DashboardFragment : Fragment() {
 
     private lateinit var dashboardViewModel: DashboardViewModel
+    val firebaseStore = FirebaseFirestore.getInstance()
+    val fireBaseAuthUser = FirebaseAuth.getInstance().currentUser
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +38,27 @@ class DashboardFragment : Fragment() {
         }
 
         dashboardViewModel.setupRecycleView(rcyListaFavoritos, requireContext())
+        //recycleView.adapter!!.notifyItemRemoved(viewHolder.adapterPosition)
 
+        val itemToachHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean = false
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                dashboardViewModel.listaFavoritos.removeAt(position)
+                rcyListaFavoritos.adapter!!.notifyItemRemoved(position)
+                firebaseStore.collection("usuarios").document(fireBaseAuthUser?.email!!)
+                    .collection("listaFavorito").document()
+                    .delete()
+
+            }
+
+
+        })
+        itemToachHelper.attachToRecyclerView(rcyListaFavoritos)
     }
 }

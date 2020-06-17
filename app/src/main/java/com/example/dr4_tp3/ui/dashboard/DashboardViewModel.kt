@@ -19,23 +19,23 @@ class DashboardViewModel : ViewModel() {
     //var listaFavoritos: ListaFavorito? = null
     val firebaseStore = FirebaseFirestore.getInstance()
 
+
+    lateinit var  listaFavoritos: MutableList<ListaFavorito>
     fun setupRecycleView(
         recycleView: RecyclerView, context: Context
     ){
 
-        //progressBar.visibility = View.VISIBLE
+
         val fireBaseAuthUser = FirebaseAuth.getInstance().currentUser
 
         var collection =
             firebaseStore.collection("usuarios").document(fireBaseAuthUser?.email!!)
                 .collection("listaFavorito")
-
         val task = collection.get()
 
         task.addOnSuccessListener {
 
-                val listaFavoritos = it.toObjects(ListaFavorito::class.java)
-
+                 listaFavoritos = it.toObjects(ListaFavorito::class.java)
                 recycleView.adapter = ListaFavoritosAdpter(listaFavoritos, this::callbackListaFavoritos)
                 recycleView.layoutManager = LinearLayoutManager(context)
 
@@ -54,6 +54,7 @@ class DashboardViewModel : ViewModel() {
             firebaseStore.collection("usuarios").document(fireBaseAuthUser?.email!!)
                 .collection("listaFavorito").document(view.txtNomeListaFavorito.text.toString())
                 .delete()
+
                 .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!") }
                 .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
 

@@ -35,11 +35,12 @@ class NotificationsViewModel : ViewModel() {
     }
 
     fun salvarNoFirestore(context: Context){
-
-        var collection = firebaseStore.collection("favoritos")
+        val fireBaseAuthUser = FirebaseAuth.getInstance().currentUser
+        var collection = firebaseStore.collection("usuarios").document(fireBaseAuthUser?.email!!)
+            .collection("listaFavorito")
 
         var lista: MutableMap<String, Any> = HashMap()
-        lista["nomeListaFavorito"] = listaFavoritos!!.listaFavorito!!
+        lista["listaFavorito"] = listaFavoritos!!.listaFavorito!!
 
         collection.document(listaFavoritos!!.listaFavorito!!).set(lista)
 

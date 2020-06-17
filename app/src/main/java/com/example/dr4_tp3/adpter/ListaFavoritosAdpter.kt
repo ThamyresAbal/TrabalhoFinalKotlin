@@ -34,7 +34,7 @@ class ListaFavoritosAdpter(private val listaFavoritos: MutableList<ListaFavorito
 
     override fun onBindViewHolder(holder: ListaFavoritoViewHolder, position: Int) {
         val listaFavorito = listaFavoritos[position]
-        holder.txtNomeListaFavorito.text = listaFavorito.listaFavorito
+        holder.txtNomeListaFavorito.text = listaFavorito.nome
 
     }
 }

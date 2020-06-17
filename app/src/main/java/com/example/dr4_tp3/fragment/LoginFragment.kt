@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.example.dr4_tp3.HomeActivity
 import com.example.dr4_tp3.R
 import com.example.dr4_tp3.viewModel.UsuarioViewModel
 import com.facebook.AccessToken
@@ -81,8 +82,10 @@ class LoginFragment : Fragment() {
             task.addOnCompleteListener() { task ->
                 if (task.isSuccessful) {
                     // Alterando a interface para a Home
+                    startActivity(Intent(activity?.baseContext, HomeActivity::class.java))
                 } else {
                     // Mensagem de erro.
+                    Toast.makeText(requireContext().applicationContext, "Erro ao efetuar o login", Toast.LENGTH_SHORT).show()
                 }
             }
         }

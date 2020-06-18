@@ -38,11 +38,11 @@
                     app:boxBackgroundMode="outline">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editTextNovoAnime"
+                        android:id="@+id/editTextNovoNome"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:hint="Novo Anime"
+                        android:hint="Novo nome"
                         android:inputType="textEmailAddress" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -54,7 +54,7 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/buttonAdd"
+                    android:id="@+id/buttonConfirmar"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
                     android:layout_gravity="center"
@@ -77,7 +77,7 @@
                     android:text="Voltar"
                     android:textColor="#000"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/buttonAdd"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonConfirmar"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>

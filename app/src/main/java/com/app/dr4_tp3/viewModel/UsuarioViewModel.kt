@@ -33,13 +33,9 @@ class UsuarioViewModel : ViewModel(){
              usuario = Usuario(
                 email = view.txtEmail.text.toString(),
                 senha = view.txtSenha.text.toString()
-
-
-
             )
             return true
         }
-
     }
 
 

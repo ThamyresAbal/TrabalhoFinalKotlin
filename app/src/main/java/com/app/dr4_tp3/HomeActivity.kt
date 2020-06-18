@@ -1,12 +1,15 @@
 package com.app.dr4_tp3
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.app.dr4_tp3.fragment.ListaAnimesFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class HomeActivity : AppCompatActivity() {
 
@@ -25,7 +28,9 @@ class HomeActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-
+     /*   val item = getIntent().getExtras()?.getString("item")
+        val i = Intent(applicationContext, ListaAnimesFragment::class.java)
+        i.putExtra("itemView", item)
+        startActivity(i)*/
     }
 }

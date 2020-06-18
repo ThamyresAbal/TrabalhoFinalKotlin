@@ -9,11 +9,11 @@
     <item
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="Favoritos" />
+        android:title="Minhas listas" />
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/common_full_open_on_phone"
-        android:title="Cria lista" />
+        android:icon="@drawable/ic_baseline_list_24"
+        android:title="Nova lista" />
 
 </menu>

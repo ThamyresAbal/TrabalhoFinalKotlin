@@ -30,11 +30,8 @@ class NotificationsViewModel : ViewModel() {
             )
             return true
         }
-
-
     }
-
-    fun salvarNoFirestore(context: Context){
+    /*fun salvarNoFirestore(context: Context){
         val fireBaseAuthUser = FirebaseAuth.getInstance().currentUser
         var collection = firebaseStore.collection("usuarios").document(fireBaseAuthUser?.email!!)
             .collection("listaFavorito")
@@ -43,11 +40,8 @@ class NotificationsViewModel : ViewModel() {
         lista["listaFavorito"] = listaFavoritos!!.listaFavorito!!
 
         collection.document(listaFavoritos!!.listaFavorito!!).set(lista)
-
-
     }
-  
-
+*/
     fun fireAddListToUser(view: View) {
         val fireBaseAuthUser = FirebaseAuth.getInstance().currentUser
 
@@ -58,7 +52,6 @@ class NotificationsViewModel : ViewModel() {
         listaFavoritosRef
             .document(view.txtNomeLista.text.toString())
             .set({})
-
     }
 
 }

@@ -38,6 +38,9 @@ class CadastroFragment : Fragment() {
                 findNavController().navigate(R.id.loginFragment)
             }
         }
+        btnVoltar.setOnClickListener {
+            findNavController().navigate(R.id.loginFragment)
+        }
     }
 
 

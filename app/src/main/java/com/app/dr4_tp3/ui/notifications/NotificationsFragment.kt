@@ -42,9 +42,9 @@ class NotificationsFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             }else{
-                notificationsViewModel.salvarNoFirestore(requireContext())
+               /* notificationsViewModel.salvarNoFirestore(requireContext())*/
                 notificationsViewModel.fireAddListToUser(view)
-                findNavController().navigate(R.id.navigation_home)
+                findNavController().navigate(R.id.navigation_dashboard)
             }
         }
     }

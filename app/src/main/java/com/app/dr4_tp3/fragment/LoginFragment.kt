@@ -2,6 +2,7 @@ package com.app.dr4_tp3.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,38 +50,40 @@ class LoginFragment : Fragment() {
                 usuarioViewModel.loginFirestore(requireContext().applicationContext,txtEmail.text.toString(), txtSenha.text.toString())
                 }
             }
-        btnLoginFB.setReadPermissions("email", "public_profile")
-        btnLoginFB.registerCallback(
-            callbackManager,
-            object : FacebookCallback<LoginResult> {
+        btnLoginFB.setReadPermissions("public_profile")
+        btnLoginFB.registerCallback(callbackManager,object : FacebookCallback<LoginResult> {
                 override fun onSuccess(loginResult: LoginResult) {
                     handleFacebookAccessToken(loginResult.accessToken)
-                    // Codigo completo
+                    Log.i("tag1","loguei")
                 }
                 override fun onCancel() {
-                    //
                 }
                 override fun onError(error: FacebookException) {
+                    Log.i("tag2","nao loguei")
                     Toast.makeText(
-                        this@LoginFragment.requireContext(),
-                        error.message, Toast.LENGTH_LONG
+                        requireContext().applicationContext,error.message,Toast.LENGTH_LONG
                     ).show()
                 }
             })
-        }
+    }
+
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
             super.onActivityResult(requestCode, resultCode, data)
             callbackManager.onActivityResult(requestCode, resultCode, data)
         }
+
         private fun handleFacebookAccessToken(token: AccessToken) {
             val credential = FacebookAuthProvider.getCredential(token.token)
             val auth = FirebaseAuth.getInstance()
             val task = auth.signInWithCredential(credential)
-
+            Log.i("tag3","entrei")
             task.addOnCompleteListener() { task ->
                 if (task.isSuccessful) {
                     // Alterando a interface para a Home
-                    startActivity(Intent(activity?.baseContext, HomeActivity::class.java))
+                  /*  startActivity(Intent(requireContext(), HomeActivity::class.java))*/
+                    activity?.let {
+                        startActivity(Intent(it, HomeActivity::class.java))
+                    }
                 } else {
                     // Mensagem de erro.
                     Toast.makeText(requireContext().applicationContext, "Erro ao efetuar o login", Toast.LENGTH_SHORT).show()
